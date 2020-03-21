@@ -3,7 +3,7 @@
     <b-row>
       <b-list-group-item class="item">
         <h5>
-          Firma Michał Paczka ma siedzibę w Gliwicach i rozpoczęła swoją działalność 1 listopada 2008
+          Firma {{ Config.FullName }} ma siedzibę w Gliwicach i rozpoczęła swoją działalność 1 listopada 2008
           roku.
         </h5>
       </b-list-group-item>
@@ -13,7 +13,7 @@
         <b-list-group>
           <b-list-group-item class="item">
             <h5>NAZWA FIRMY</h5>
-            <p>MICHAŁ PACZKA</p>
+            <p>{{ Config.FullName }}</p>
             <p>Gabinet Psychoterapii i Leczenia Uzależnień</p>
           </b-list-group-item>
           <b-list-group-item class="item">

@@ -2,7 +2,7 @@
   <div>
     <h2 id="title">
       <p>GABINET PSYCHOTERAPII</p>
-      <p>MICHAŁ PACZKA</p>
+      <p>{{ Config.FullName.toUpperCase() }}</p>
     </h2>
     <b-nav card-header tabs fill>
       <b-nav-item to="/">Aktualności</b-nav-item>
@@ -15,6 +15,18 @@
     </b-nav>
   </div>
 </template>
+
+<script>
+import { Config } from "../../config/config";
+
+export default {
+  data: function() {
+    return {
+      Config: Config,
+    };
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 #title {

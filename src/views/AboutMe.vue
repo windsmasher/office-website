@@ -2,7 +2,7 @@
   <div class="about">
     <b-card-group deck>
       <b-card>
-        <h4>Michał Paczka</h4>
+        <h4>{{ Config.FullName }}</h4>
         <p>Pedagog, specjalista terapii uzależnień</p>
         <p>
           <b-card-img :src="require('../assets/michal-paczka-terapia-uzaleznienia-gliwice.jpg')"></b-card-img>
@@ -33,7 +33,7 @@
       </b-card>
       <b-card class="description">
         <h4>Partnerzy</h4>
-        <p>Współpracuję z psychologiem - mgr Teresą Trautman.</p>
+        <p>Współpracuję z psychologiem - mgr {{ Config.AssociateFullName }}.</p>
         <h4>Superwizje</h4>
         <p>
           Swoją pracę poddaję regularnej superwizji u mgr Romy Ulasińkiej -
