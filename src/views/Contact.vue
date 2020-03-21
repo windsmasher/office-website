@@ -7,15 +7,15 @@
           <b-card-img :src="require('../assets/michal-paczka-terapia-uzaleznienia-gliwice.jpg')"></b-card-img>
         </p>
         <p>
-          <b>tel: +48 602 610 023</b>
+          <b>tel: {{ Config.PhoneNumber }}</b>
         </p>
         <p>W przypadku braku kontaktu oddzwaniam w tym samym dniu!</p>
         <p>
-          <b>email: mpaczka@gmail.com</b>
+          <b>email: {{ Config.Email }}</b>
         </p>
       </b-card>
       <b-card>
-        <p>Gliwice, ul. Zwycięstwa 14 / lok. 56 (II piętro)</p>
+        <p>{{ Config.CompanyAddress }}</p>
         <a
           href="https://www.google.pl/maps/place/Gabinet+Psychoterapii+i+Leczenia+Uzale%C5%BCnie%C5%84.+Micha%C5%82+Paczka./@50.295132,18.668675,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x593680dfe4d3e6e?hl=pl"
         >
@@ -32,6 +32,18 @@
     </b-card-group>
   </div>
 </template>
+
+<script>
+import { Config } from "../../config/config";
+
+export default {
+  data: function() {
+    return {
+      Config: Config,
+    };
+  }
+};
+</script>
 
 <style scoped>
 

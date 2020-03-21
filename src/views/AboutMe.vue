@@ -9,7 +9,7 @@
         </p>
       </b-card>
       <b-card>
-        <h4>CERTYFIKAT NR SP/0092/2006</h4>
+        <h4>CERTYFIKAT NR {{ Config.CertificatNumber }}</h4>
         <b-card-img :src="require('../assets/certyfikat-psychoterapia-uzaleznienia-michal-paczka.jpg')"></b-card-img>
       </b-card>
     </b-card-group>
@@ -44,3 +44,15 @@
     </b-card-group>
   </div>
 </template>
+
+<script>
+import { Config } from "../../config/config";
+
+export default {
+  data: function() {
+    return {
+      Config: Config,
+    };
+  }
+};
+</script>

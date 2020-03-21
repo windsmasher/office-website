@@ -1,6 +1,18 @@
 <template>
-  <div id="footer"><b>tel. 602 610 023</b></div>
+  <div id="footer"><b>tel. {{ Config.PhoneNumber }}</b></div>
 </template>
+
+<script>
+import { Config } from "../../config/config";
+
+export default {
+  data: function() {
+    return {
+      Config: Config,
+    };
+  }
+};
+</script>
 
 <style scoped>
 #footer {

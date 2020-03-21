@@ -18,11 +18,11 @@
           </b-list-group-item>
           <b-list-group-item class="item">
             <h5>ADRES GABINETU</h5>
-            <p>Gliwice, ul. Zwycięstwa 14/56 (II piętro)</p>
+            <p>{{ Config.CompanyAddress }}</p>
           </b-list-group-item>
           <b-list-group-item class="item">
             <h5>NR KONTA - dane do przelewu</h5>
-            <p>ING Bank Śląski 83 1050 1285 1000 0002 0215 1718</p>
+            <p>{{ Config.BankAccount }}</p>
           </b-list-group-item>
         </b-list-group>
       </b-col>
@@ -30,21 +30,33 @@
         <b-list-group>
           <b-list-group-item class="item">
             <h5>NIP</h5>
-            <p>631-154-68-04</p>
+            <p>{{ Config.NIP }}</p>
           </b-list-group-item>
           <b-list-group-item class="item">
             <h5>REGON</h5>
-            <p>241042730</p>
+            <p>{{ Config.REGON }}</p>
           </b-list-group-item>
           <b-list-group-item class="item">
             <h5>KRS</h5>
-            <p>I/645/2008</p>
+            <p>{{ Config.KRS }}</p>
           </b-list-group-item>
         </b-list-group>
       </b-col>
     </b-row>
   </div>
 </template>
+
+<script>
+import { Config } from "../../config/config";
+
+export default {
+  data: function() {
+    return {
+      Config: Config,
+    };
+  }
+};
+</script>
 
 <style scoped>
 .item {
