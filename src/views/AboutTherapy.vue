@@ -7,6 +7,7 @@
           Psychoterapia kierowana jest do osób dorosłych, młodzieży, dzieci i
           rodziców borykających się z problemami wychowawczymi, oraz do rodzin,
           małżeństw i par przeżywających problemy takie jak:
+          
         </p>
         <ul>
           <li>
