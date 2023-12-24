@@ -1,16 +1,18 @@
 <template>
-  <div id="footer"><b>tel. {{ Config.PhoneNumber }}</b></div>
+  <div id="footer">
+    <b>tel. {{ Config.PhoneNumber }}</b>
+  </div>
 </template>
 
 <script>
-import { Config } from "../../config/config";
+import { Config } from '../../config/config';
 
 export default {
-  data: function() {
+  data: function () {
     return {
       Config: Config,
     };
-  }
+  },
 };
 </script>
 
@@ -18,7 +20,7 @@ export default {
 #footer {
   margin: 50px 0 50px 0;
   padding: 5px;
-  border-radius: 5px;
-  background-color: #e9b9b9;
+  background-color: #098666;
+  color: #fff;
 }
 </style>

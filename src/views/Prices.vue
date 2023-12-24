@@ -5,16 +5,22 @@
 </template>
 
 <script>
-import { Config } from "../../config/config";
+import { Config } from '../../config/config';
 
-  export default {
-    data() {
-      return {
-        items: [
-          { 'Sesja psychoterapii': 'Indywidualna', Cena: `${Config.Price.Individual} PLN` },
-          { 'Sesja psychoterapii': 'Rodzinna', Cena: `${Config.Price.Family} PLN` },
-        ]
-      }
-    }
-  }
+export default {
+  data() {
+    return {
+      items: [
+        {
+          'Sesja psychoterapii': 'Indywidualna',
+          Cena: `${Config.Price.Individual} PLN`,
+        },
+        {
+          'Sesja psychoterapii': 'Rodzinna',
+          Cena: `${Config.Price.Family} PLN`,
+        },
+      ],
+    };
+  },
+};
 </script>
