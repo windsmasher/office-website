@@ -16,7 +16,7 @@ export default {
           Cena: `${Config.Price.Individual} PLN`,
         },
         {
-          'Sesja psychoterapii': 'Rodzinna',
+          'Sesja psychoterapii': 'Rodzinna / Małżeńska / Par',
           Cena: `${Config.Price.Family} PLN`,
         },
       ],

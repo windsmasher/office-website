@@ -2,24 +2,25 @@
   <div class="home">
     <b-card-group deck>
       <b-card>
-        <b-card-img :src="require('../assets/logo-psychoterapia-uzaleznienia-michal-paczka.jpg')"></b-card-img>
+        <b-card-img
+          :src="
+            require('../assets/logo-psychoterapia-uzaleznienia-michal-paczka.jpg')
+          "
+        ></b-card-img>
       </b-card>
       <b-card>
         <p>
-          <b>W ZWIĄZKU Z OBECNĄ SYTUACJĄ - JEST MOŻLIWOŚĆ ODBYCIA SESJI TERAPEUTYCZNEJ ONLINE.</b>
+          Zapraszam do współpracy rodziny, małżeństwa, pary, osoby uzależnione
+          od alkoholu, narkotyków, leków, hazardu, internetu i innych.
         </p>
         <p>
-          <b>Proszę o kontakt telefoniczny w celu ustalenia szczegółów.</b>
+          Oferuję pomoc w zakresie problemów wychowawczych, zaburzeń zachowania
+          u dzieci i młodzieży, kryzysów, problemów emocjonalnych.
         </p>
         <p>
-          Zapraszam do współpracy rodziny, małżeństwa, pary, osoby uzależnione od
-          alkoholu, narkotyków, leków, hazardu, internetu i innych.
+          Oferuję pomoc i konsultacje psychologiczne, psychoterapię
+          indywidualną, rodzinną, małżeńską oraz grupową.
         </p>
-        <p>
-          Oferuję pomoc w zakresie problemów wychowawczych, zaburzeń zachowania u
-          dzieci i młodzieży, kryzysów, problemów emocjonalnych.
-        </p>
-        <p>Oferuję pomoc i konsultacje psychologiczne, psychoterapię indywidualną, rodzinną, małżeńską oraz grupową.</p>
       </b-card>
     </b-card-group>
     <b-card-group deck class="cards-top-margin">
@@ -52,8 +53,9 @@
         <p>Sprawdź czy masz problem?</p>
         <a
           href="https://docs.google.com/spreadsheet/viewform?formkey=dDNCNW41Rkh6a1dyRjF0aFJfZXBJQXc6MQ"
-          style="color:blue; text-decoration: underline; "
-        >TEST BALTIMORSKI - wywiad z samym sobą !</a>
+          style="color: blue; text-decoration: underline"
+          >TEST BALTIMORSKI - wywiad z samym sobą !</a
+        >
       </b-card>
     </b-card-group>
   </div>
