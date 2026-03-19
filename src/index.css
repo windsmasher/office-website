@@ -1,15 +1,63 @@
+:root {
+  /* Colors */
+  --color-primary: #098666;
+  --color-primary-hover: #077a5a;
+  --color-primary-light: rgba(9, 134, 102, 0.08);
+  --color-text: #1a2b3c;
+  --color-text-muted: #5a6b7c;
+  --color-bg: #f8fafb;
+  --color-card-bg: #ffffff;
+  --color-border: rgba(9, 134, 102, 0.15);
+
+  /* Typography */
+  --font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing & layout */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --transition: 0.2s ease;
+
+  /* Breakpoints – keep in sync with @media queries below (CSS vars not usable in @media) */
+  --bp-tablet: 992px;
+  --bp-mobile: 768px;
+
+  /* Company info grid */
+  --company-info-card-min-height: 120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-inner {
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-right: 10%;
-  margin-left: 10%;
+  color: var(--color-text);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  flex: 1;
 }
 
 .content {
   margin-top: 70px;
+  padding-bottom: 2rem;
 }
 
 .row {
@@ -25,40 +73,206 @@
   margin-top: 30px;
 }
 
-/* card-group with spacing equivalent to Bootstrap 4 card-deck */
 .card-group {
-  gap: 30px;
+  gap: 24px;
+}
+
+/* Modern card overrides */
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-body {
+  padding: 1.5rem 1.75rem !important;
+}
+
+.card img {
+  border-radius: var(--radius-sm);
+  max-width: 100%;
+  height: auto;
 }
 
 /* Navbar */
 #title {
-  padding: 40px;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+#title p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text);
+}
+
+#title p:first-child {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
 .nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0 1rem;
 }
 
 .nav .nav-link {
   text-decoration: none;
-  font-weight: bold;
-  color: #2c3e50;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.nav .nav-link:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .nav .router-link-exact-active {
-  background-color: #098666;
+  background-color: var(--color-primary);
   color: #fff !important;
 }
 
-/* Footer */
+/* Footer - full width, clean bottom edge */
 #footer {
-  margin: 50px 0 50px 0;
-  padding: 5px;
-  background-color: #098666;
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  background: var(--color-primary);
   color: #fff;
+  text-align: center;
+  font-weight: 600;
+  width: 100%;
+}
+
+#footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Table modernization */
+.table {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table thead th {
+  background-color: var(--color-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+}
+
+.table tbody td {
+  padding: 1rem 1.25rem;
+  transition: background-color var(--transition);
+}
+
+.table-hover tbody tr:hover td {
+  background-color: var(--color-primary-light) !important;
+}
+
+/* ListGroup modernization */
+.list-group-item {
+  border-radius: var(--radius-sm) !important;
+  margin: 0.5rem 0 !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Company info - uniform grid layout */
+.company-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.company-info-card {
+  min-height: var(--company-info-card-min-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.company-info-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.company-info-card h5 {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.company-info-intro .card-body {
+  text-align: center;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* Headings */
+h4 {
+  color: var(--color-text);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Responsive – breakpoints: --bp-tablet 992px, --bp-mobile 768px */
+@media (max-width: 992px) {
+  .company-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-inner {
+    padding: 0 1rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav .nav-link {
+    text-align: center;
+  }
+
+  .company-info-grid {
+    grid-template-columns: 1fr;
+  }
 }

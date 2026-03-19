@@ -3,9 +3,11 @@ import { Config } from '../../config/config';
 
 const Footer: React.FC = () => {
   return (
-    <div id="footer">
-      <b>tel. {Config.PhoneNumber}</b>
-    </div>
+    <footer id="footer">
+      <a href={`tel:${Config.PhoneNumber.replace(/\s/g, '')}`}>
+        tel. {Config.PhoneNumber}
+      </a>
+    </footer>
   );
 };
 

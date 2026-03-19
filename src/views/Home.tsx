@@ -61,7 +61,8 @@ const Home: React.FC = () => {
             <p>Sprawdź czy masz problem?</p>
             <a
               href="https://docs.google.com/spreadsheet/viewform?formkey=dDNCNW41Rkh6a1dyRjF0aFJfZXBJQXc6MQ"
-              style={{ color: 'blue', textDecoration: 'underline' }}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               TEST BALTIMORSKI - wywiad z samym sobą !
             </a>
