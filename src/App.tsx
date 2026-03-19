@@ -7,20 +7,18 @@ import { routes } from './config/routes';
 const App: React.FC = () => {
   return (
     <>
-      <div className="app-inner">
-        <Navbar />
-        <div className="content">
-          <Routes>
-            {routes.map((route) =>
-              route.index ? (
-                <Route key={route.path} index element={route.element} />
-              ) : (
-                <Route key={route.path} path={route.path} element={route.element} />
-              )
-            )}
-          </Routes>
-        </div>
-      </div>
+      <Navbar />
+      <main>
+        <Routes>
+          {routes.map((route) =>
+            route.index ? (
+              <Route key={route.path} index element={route.element} />
+            ) : (
+              <Route key={route.path} path={route.path} element={route.element} />
+            )
+          )}
+        </Routes>
+      </main>
       <Footer />
     </>
   );
