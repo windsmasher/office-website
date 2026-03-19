@@ -34,11 +34,7 @@ const AboutMe: React.FC = () => {
               ośrodkach leczenia uzależnień (wieloletnia praca w stażowym ośrodku
               Betania w Częstochowie). Byłem współzałożycielem Górnośląskiego Oddziału{' '}
               <a href="http://monar.org/" target="_blank" rel="noopener noreferrer">MONAR</a> w Gliwicach. Stale współpracuję ze
-              Stowarzyszeniem GTW. Obecnie pracuję w{' '}
-              <a href="http://wotuiw.opole.pl/index.php/o-nas" target="_blank" rel="noopener noreferrer">
-                Wojewódzkim Ośrodku Terapii Uzależnień i Współuzależnień
-              </a>{' '}
-              w Opolu.
+              Stowarzyszeniem GTW. Obecnie pracuję w Wojewódzkim Ośrodku Terapii Uzależnień i Współuzależnień w Opolu.
             </p>
           </Card.Body>
         </Card>
