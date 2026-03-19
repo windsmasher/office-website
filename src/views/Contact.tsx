@@ -28,6 +28,8 @@ const Contact: React.FC = () => {
             <p>{Config.CompanyAddress}</p>
             <a
               href="https://www.google.pl/maps/place/Gabinet+Psychoterapii+i+Leczenia+Uzale%C5%BCnie%C5%84.+Micha%C5%82+Paczka./@50.295132,18.668675,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x593680dfe4d3e6e?hl=pl"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Card.Img src={mapImg} />
             </a>
