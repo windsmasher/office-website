@@ -1,0 +1,64 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.content {
+  margin-top: 70px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.description {
+  text-align: justify;
+}
+
+.cards-top-margin {
+  margin-top: 30px;
+}
+
+/* card-group with spacing equivalent to Bootstrap 4 card-deck */
+.card-group {
+  gap: 30px;
+}
+
+/* Navbar */
+#title {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav .nav-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.nav .router-link-exact-active {
+  background-color: #098666;
+  color: #fff !important;
+}
+
+/* Footer */
+#footer {
+  margin: 50px 0 50px 0;
+  padding: 5px;
+  background-color: #098666;
+  color: #fff;
+}

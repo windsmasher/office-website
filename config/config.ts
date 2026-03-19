@@ -1,4 +1,23 @@
-export const Config = {
+export interface PriceConfig {
+  Individual: number;
+  Family: number;
+}
+
+export interface AppConfig {
+  FullName: string;
+  NIP: string;
+  REGON: string;
+  KRS: string;
+  CompanyAddress: string;
+  BankAccount: string;
+  PhoneNumber: string;
+  Email: string;
+  Price: PriceConfig;
+  CertificatNumber: string;
+  AssociateFullName: string;
+}
+
+export const Config: AppConfig = {
   FullName: 'Michał Paczka',
   NIP: '631-154-68-04',
   REGON: '241042730',
