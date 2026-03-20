@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Config } from '../../config/config';
+import { TherapyFormIcon } from '../components/TherapyFormIcon';
 
 const AboutTherapy: React.FC = () => {
   const phone = Config.PhoneNumber;
@@ -75,19 +76,27 @@ const AboutTherapy: React.FC = () => {
           <h2 className="section__title">Formy terapii</h2>
           <div className="therapy-grid">
             <div className="therapy-card">
-              <span className="therapy-card__icon" aria-hidden="true">🧠</span>
+              <span className="therapy-card__icon">
+                <TherapyFormIcon variant="individual" />
+              </span>
               <h3 className="therapy-card__title">Terapia Indywidualna</h3>
             </div>
             <div className="therapy-card">
-              <span className="therapy-card__icon" aria-hidden="true">👥</span>
+              <span className="therapy-card__icon">
+                <TherapyFormIcon variant="group" />
+              </span>
               <h3 className="therapy-card__title">Terapia Grupowa</h3>
             </div>
             <div className="therapy-card">
-              <span className="therapy-card__icon" aria-hidden="true">🏡</span>
+              <span className="therapy-card__icon">
+                <TherapyFormIcon variant="family" />
+              </span>
               <h3 className="therapy-card__title">Terapia Rodzinna</h3>
             </div>
             <div className="therapy-card">
-              <span className="therapy-card__icon" aria-hidden="true">💕</span>
+              <span className="therapy-card__icon">
+                <TherapyFormIcon variant="couple" />
+              </span>
               <h3 className="therapy-card__title">Terapia Małżeńska</h3>
             </div>
           </div>
