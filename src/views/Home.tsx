@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Config } from '../../config/config';
+import { NewsSection } from '../components/NewsSection';
 import { TherapyFormIcon } from '../components/TherapyFormIcon';
 import logo from '../assets/logo-psychoterapia-uzaleznienia-michal-paczka.jpg';
 
@@ -80,48 +81,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <h2 className="section__title">Aktualności</h2>
-          <div className="card-grid card-grid--2">
-            <div className="card">
-              <h3 className="card__title">Grupa Treningu Zastępowania Agresji</h3>
-              <p>
-                Planuję start grupy Treningu Zastępowania Agresji i Umiejętności
-                Społecznych dla dorosłych.
-              </p>
-              <p>Na zajęciach nauczysz się:</p>
-              <ul className="styled-list">
-                <li>kontrolować złość</li>
-                <li>rozwiązywać konflikty</li>
-                <li>otwarcie mówić o swoich potrzebach</li>
-                <li>podejmować decyzje w zgodzie z sobą</li>
-                <li>radzić sobie z presją grupy</li>
-              </ul>
-            </div>
-            <div className="card">
-              <h3 className="card__title">Terapia Grupowa w Leczeniu Uzależnień</h3>
-              <p>
-                W najbliższym czasie (po zebraniu grupy osób od 5-10) oprócz terapii
-                indywidualnej rozpoczyna się psychoterapia grupowa.
-              </p>
-              <p>Proszę o zgłaszanie się zainteresowanych osób do gabinetu.</p>
-              <p>
-                <strong>TEST - WYWIAD Z SAMYM SOBĄ</strong>
-              </p>
-              <p>Sprawdź czy jesteś uzależniony?</p>
-              <p>Sprawdź czy masz problem?</p>
-              <a
-                href="https://docs.google.com/spreadsheet/viewform?formkey=dDNCNW41Rkh6a1dyRjF0aFJfZXBJQXc6MQ"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                TEST BALTIMORSKI - wywiad z samym sobą !
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <NewsSection />
 
       <section className="section section--alt">
         <div className="container">

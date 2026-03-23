@@ -491,6 +491,20 @@ strong, b {
   font-weight: 600;
 }
 
+.news-card__date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+.news-section__status {
+  color: var(--color-text-muted);
+}
+
+.news-section__dynamic {
+  margin-bottom: var(--space-xl);
+}
+
 .card-grid {
   display: grid;
   gap: var(--space-md);
