@@ -1,4 +1,5 @@
-name: Deploy to OVH via SFTP
+# Site → OVH (SFTP). Studio → hosting Sanity (wymaga SANITY_AUTH_TOKEN w Secrets).
+name: Deploy site and Sanity Studio
 
 on:
   push:
@@ -38,3 +39,28 @@ jobs:
             mirror --reverse --delete --verbose ./dist/ ./www/;
             bye
           "
+
+  # Równolegle ze stroną: wypchnięcie Studio na *.sanity.studio
+  deploy-sanity-studio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+
+      - name: Install Studio dependencies
+        working-directory: studio
+        run: npm ci
+
+      - name: Deploy Sanity Studio
+        working-directory: studio
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+        run: npx sanity deploy --yes

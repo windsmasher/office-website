@@ -1,9 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  PortableText,
+  type PortableTextComponents,
+} from '@portabletext/react';
 import { Config } from '../../config/config';
+import {
+  fetchAboutMePage,
+  getSanityBrowserClient,
+} from '../lib/sanity/client';
+import type { AboutMePageData } from '../lib/sanity/types';
 import photoImg from '../assets/michal-paczka-terapia-uzaleznienia-gliwice.jpg';
 import certImg from '../assets/certyfikat-psychoterapia-uzaleznienia-michal-paczka.jpg';
 
+const aboutMePortableComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <p>{children}</p>,
+  },
+  marks: {
+    link: ({ value, children }) => (
+      <a
+        href={value?.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ),
+  },
+};
+
 const AboutMe: React.FC = () => {
+  const [data, setData] = useState<AboutMePageData | null | undefined>(
+    undefined,
+  );
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!getSanityBrowserClient()) {
+      setData(null);
+      setError('missing_env');
+      return;
+    }
+
+    let cancelled = false;
+    fetchAboutMePage()
+      .then((doc) => {
+        if (!cancelled) setData(doc ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError('fetch');
+          setData(null);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const loading = data === undefined && error === null;
+
+  const cmsErrorMessage =
+    error === 'missing_env' ? (
+      <p>
+        Brak konfiguracji CMS: ustaw <code>VITE_SANITY_PROJECT_ID</code> i{' '}
+        <code>VITE_SANITY_DATASET</code>.
+      </p>
+    ) : error === 'fetch' ? (
+      <p>Nie udało się załadować treści. Spróbuj odświeżyć stronę.</p>
+    ) : null;
+
   return (
     <>
       <section className="page-header">
@@ -23,35 +90,56 @@ const AboutMe: React.FC = () => {
       <section className="section">
         <div className="container container--narrow">
           <div className="card">
-            <p>
-              Posiadam bogatą praktyką w różnych obszarach pomocowych. Mam wieloletnie
-              doświadczenie w pracy z młodzieżą i rodzinami przeżywającymi kryzysy.
-              Doświadczenie zdobywałem pracując w Ośrodku Szkolno-Wychowawczym,
-              ośrodkach leczenia uzależnień (wieloletnia praca w stażowym ośrodku
-              Betania w Częstochowie). Byłem współzałożycielem Górnośląskiego Oddziału{' '}
-              <a href="http://monar.org/" target="_blank" rel="noopener noreferrer">MONAR</a> w Gliwicach. Stale współpracuję ze
-              Stowarzyszeniem GTW. Obecnie pracuję w Wojewódzkim Ośrodku Terapii Uzależnień i Współuzależnień w Opolu.
-            </p>
+            {loading ? (
+              <p className="news-section__status">Ładowanie…</p>
+            ) : null}
+            {error ? cmsErrorMessage : null}
+            {!loading && !error && data === null ? (
+              <p>Brak treści „O mnie” w CMS.</p>
+            ) : null}
+            {!loading && !error && data?.intro && data.intro.length > 0 ? (
+              <PortableText
+                value={data.intro}
+                components={aboutMePortableComponents}
+              />
+            ) : null}
+            {!loading &&
+            !error &&
+            data &&
+            (!data.intro || data.intro.length === 0) ? (
+              <p>Brak wstępu w dokumencie CMS.</p>
+            ) : null}
           </div>
         </div>
       </section>
 
       <section className="section section--alt">
         <div className="container">
-          <div className="card-grid card-grid--2">
-            <div className="card">
-              <h2 className="card__title">Partnerzy</h2>
-              <p>Współpracuję z psychologiem - mgr {Config.AssociateFullName}.</p>
+          {loading ? (
+            <p className="news-section__status">Ładowanie…</p>
+          ) : null}
+          {!loading &&
+          !error &&
+          data &&
+          data.partnersTitle &&
+          data.supervisionTitle ? (
+            <div className="card-grid card-grid--2">
+              <div className="card">
+                <h2 className="card__title">{data.partnersTitle}</h2>
+                <p>{data.partnersBody}</p>
+              </div>
+              <div className="card">
+                <h2 className="card__title">{data.supervisionTitle}</h2>
+                <p>{data.supervisionBody}</p>
+              </div>
             </div>
-            <div className="card">
-              <h2 className="card__title">Superwizje</h2>
-              <p>
-                Swoją pracę poddaję regularnej superwizji u mgr Romy Ulasińkiej -
-                certyfikowanej psychoterapeutki i superwizorki psychoterapii Polskiego
-                Towarzystwa Psychiatrycznego.
-              </p>
-            </div>
-          </div>
+          ) : null}
+          {!loading &&
+          !error &&
+          data &&
+          (!data.partnersTitle || !data.supervisionTitle) ? (
+            <p>Brak tytułów lub treści kart Partnerzy / Superwizje w CMS.</p>
+          ) : null}
         </div>
       </section>
 

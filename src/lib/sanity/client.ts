@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from '@sanity/client';
-import type { MyOfferPageData, NewsItem } from './types';
+import type { AboutMePageData, MyOfferPageData, NewsItem } from './types';
 
 const apiVersion = '2024-01-01';
 
@@ -45,4 +45,18 @@ export async function fetchMyOfferPage(): Promise<MyOfferPageData | null> {
   const client = getSanityBrowserClient();
   if (!client) return null;
   return client.fetch<MyOfferPageData | null>(myOfferPageQuery);
+}
+
+export const aboutMePageQuery = `*[_type == "aboutMePage"][0]{
+  intro,
+  partnersTitle,
+  partnersBody,
+  supervisionTitle,
+  supervisionBody
+}`;
+
+export async function fetchAboutMePage(): Promise<AboutMePageData | null> {
+  const client = getSanityBrowserClient();
+  if (!client) return null;
+  return client.fetch<AboutMePageData | null>(aboutMePageQuery);
 }

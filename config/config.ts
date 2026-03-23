@@ -14,7 +14,6 @@ export interface AppConfig {
   Email: string;
   Price: PriceConfig;
   CertificatNumber: string;
-  AssociateFullName: string;
 }
 
 export const Config: AppConfig = {
@@ -28,5 +27,4 @@ export const Config: AppConfig = {
   Email: 'mpaczka@gmail.com',
   Price: { Individual: 150, Family: 200 },
   CertificatNumber: 'SP/0092/2006',
-  AssociateFullName: 'Teresą Trautman',
 };
