@@ -1,56 +1,99 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Config } from '../../config/config';
+import {
+  fetchMyOfferPage,
+  getSanityBrowserClient,
+} from '../lib/sanity/client';
+import type { MyOfferPageData } from '../lib/sanity/types';
 
 const MyOffer: React.FC = () => {
   const phoneHref = `tel:${Config.PhoneNumber.replace(/\s/g, '')}`;
+  const [data, setData] = useState<MyOfferPageData | null | undefined>(
+    undefined,
+  );
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!getSanityBrowserClient()) {
+      setData(null);
+      setError('missing_env');
+      return;
+    }
+
+    let cancelled = false;
+    fetchMyOfferPage()
+      .then((doc) => {
+        if (!cancelled) setData(doc ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError('fetch');
+          setData(null);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const pageTitle =
+    data?.pageTitle?.trim() || 'Moja oferta';
 
   return (
     <>
       <section className="page-header">
         <div className="container">
-          <h1 className="page-header__title">Moja oferta</h1>
+          <h1 className="page-header__title">{pageTitle}</h1>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <div className="card-grid card-grid--2">
-            <div className="card">
-              <h2 className="card__title">Zakres usług</h2>
-              <ul className="styled-list">
-                <li>terapia rodzinna - w gabinecie lub w miejscu zamieszkania,</li>
-                <li>psychoterapia indywidualna dorosłych,</li>
-                <li>terapia małżeństw i par,</li>
-                <li>psychoterapia indywidualna dzieci, młodzieży i młodych dorosłych,</li>
-                <li>poradnictwo rodzinne,</li>
-                <li>grupy wsparcia dla rodziców dzieci uzależnionych,</li>
-                <li>terapia indywidualna i grupowa dla uzależnionych od alkoholu,</li>
-                <li>
-                  terapia uzależnionych od narkotyków, leków, hazardu, internetu i
-                  innych.
-                </li>
-              </ul>
+          {data === undefined ? (
+            <p className="news-section__status">Ładowanie…</p>
+          ) : null}
+          {error === 'missing_env' ? (
+            <p>
+              Brak konfiguracji CMS: ustaw{' '}
+              <code>VITE_SANITY_PROJECT_ID</code> i{' '}
+              <code>VITE_SANITY_DATASET</code>.
+            </p>
+          ) : null}
+          {error === 'fetch' ? (
+            <p>Nie udało się załadować treści. Spróbuj odświeżyć stronę.</p>
+          ) : null}
+          {data === null && !error ? (
+            <p>Brak strony oferty w CMS (dokument „Moja oferta”).</p>
+          ) : null}
+          {data && data.cards.length === 0 ? (
+            <p>Brak treści oferty w CMS.</p>
+          ) : null}
+          {data && data.cards && data.cards.length > 0 ? (
+            <div className="card-grid card-grid--2">
+              {data.cards.map((card) => (
+                <div className="card" key={card._key}>
+                  <h2 className="card__title">{card.title}</h2>
+                  {card.listItems && card.listItems.length > 0 ? (
+                    <ul className="styled-list">
+                      {card.listItems.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {card.body ? <p>{card.body}</p> : null}
+                </div>
+              ))}
             </div>
-            <div className="card">
-              <h2 className="card__title">Oferuję</h2>
-              <p>
-                Pomoc w całym zakresie dysfunkcji i problemów rodzinnych takich jak:
-                kryzysy, trudności wychowawcze, agresja i autoagresja, przemoc,
-                wykorzystanie seksualne dziecka, żałoba, rozwody, choroby psychiczne,
-                alkoholizm w rodzinie oraz inne poważne urazy psychiczne.
-              </p>
-            </div>
-          </div>
+          ) : null}
         </div>
       </section>
 
       <section className="section section--alt">
         <div className="container">
           <div className="cta-banner">
-            <h2 className="cta-banner__title">
-              Zapraszam do współpracy
-            </h2>
+            <h2 className="cta-banner__title">Zapraszam do współpracy</h2>
             <div className="cta-banner__actions">
               <Link to="/kontakt" className="btn btn--primary">
                 Umów konsultację

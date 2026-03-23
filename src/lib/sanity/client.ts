@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from '@sanity/client';
-import type { NewsItem } from './types';
+import type { MyOfferPageData, NewsItem } from './types';
 
 const apiVersion = '2024-01-01';
 
@@ -11,6 +11,16 @@ export const newsItemsQuery = `*[_type == "newsItem" && defined(publishedAt)] | 
   body,
   linkUrl,
   linkLabel
+}`;
+
+export const myOfferPageQuery = `*[_type == "myOfferPage"][0]{
+  pageTitle,
+  "cards": coalesce(cards[]{
+    _key,
+    title,
+    listItems,
+    body
+  }, [])
 }`;
 
 export function getSanityBrowserClient(): SanityClient | null {
@@ -29,4 +39,10 @@ export async function fetchNewsItems(): Promise<NewsItem[]> {
   const client = getSanityBrowserClient();
   if (!client) return [];
   return client.fetch<NewsItem[]>(newsItemsQuery);
+}
+
+export async function fetchMyOfferPage(): Promise<MyOfferPageData | null> {
+  const client = getSanityBrowserClient();
+  if (!client) return null;
+  return client.fetch<MyOfferPageData | null>(myOfferPageQuery);
 }

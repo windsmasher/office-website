@@ -7,3 +7,15 @@ export type NewsItem = {
   linkUrl?: string;
   linkLabel?: string;
 };
+
+export type OfferCard = {
+  _key: string;
+  title: string;
+  listItems?: string[];
+  body?: string;
+};
+
+export type MyOfferPageData = {
+  pageTitle: string;
+  cards: OfferCard[];
+};
