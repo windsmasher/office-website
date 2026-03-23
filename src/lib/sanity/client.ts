@@ -1,5 +1,12 @@
 import { createClient, type SanityClient } from '@sanity/client';
-import type { AboutMePageData, MyOfferPageData, NewsItem } from './types';
+import type {
+  AboutMePageData,
+  AboutTherapyPageData,
+  CompanyPageData,
+  MyOfferPageData,
+  NewsItem,
+  PricingPageData,
+} from './types';
 
 const apiVersion = '2024-01-01';
 
@@ -59,4 +66,52 @@ export async function fetchAboutMePage(): Promise<AboutMePageData | null> {
   const client = getSanityBrowserClient();
   if (!client) return null;
   return client.fetch<AboutMePageData | null>(aboutMePageQuery);
+}
+
+export const pricingPageQuery = `*[_type == "pricingPage"][0]{
+  pageTitle,
+  pageSubtitle,
+  sharedCardLabel,
+  individualTitle,
+  individualAmount,
+  familyTitle,
+  familyAmount,
+  ctaBannerTitle
+}`;
+
+export async function fetchPricingPage(): Promise<PricingPageData | null> {
+  const client = getSanityBrowserClient();
+  if (!client) return null;
+  return client.fetch<PricingPageData | null>(pricingPageQuery);
+}
+
+export const companyPageQuery = `*[_type == "companyPage"][0]{
+  pageTitle,
+  leadParagraph,
+  "rows": coalesce(rows[]{ _key, label, value, subValue }, [])
+}`;
+
+export async function fetchCompanyPage(): Promise<CompanyPageData | null> {
+  const client = getSanityBrowserClient();
+  if (!client) return null;
+  return client.fetch<CompanyPageData | null>(companyPageQuery);
+}
+
+export const aboutTherapyPageQuery = `*[_type == "aboutTherapyPage"][0]{
+  pageTitle,
+  pageSubtitle,
+  leftLead,
+  "leftListItems": coalesce(leftListItems[], []),
+  rightColumnBody,
+  therapyFormsTitle,
+  "therapyForms": coalesce(therapyForms[]{ _key, iconKey, title }, []),
+  stepsSectionTitle,
+  "steps": coalesce(steps[]{ _key, stepNumber, title, body }, []),
+  ctaBannerTitle
+}`;
+
+export async function fetchAboutTherapyPage(): Promise<AboutTherapyPageData | null> {
+  const client = getSanityBrowserClient();
+  if (!client) return null;
+  return client.fetch<AboutTherapyPageData | null>(aboutTherapyPageQuery);
 }
