@@ -10,4 +10,6 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('newsItem').title('Aktualności'),
       S.documentTypeListItem('myOfferPage').title('Moja oferta'),
       S.documentTypeListItem('aboutMePage').title('O mnie'),
+      S.documentTypeListItem('pricingPage').title('Cennik'),
+      S.documentTypeListItem('companyPage').title('Dane firmy'),
     ]);
