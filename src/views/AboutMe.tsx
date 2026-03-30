@@ -10,8 +10,8 @@ import {
 } from '../lib/sanity/client';
 import type { AboutMePageData } from '../lib/sanity/types';
 import { CmsErrorMessage } from '../components/CmsErrorMessage';
+import { CertificatePhotoStack } from '../components/CertificatePhotoStack';
 import photoImg from '../assets/michal-paczka-terapia-uzaleznienia-gliwice.jpg';
-import certImg from '../assets/certyfikat-psychoterapia-uzaleznienia-michal-paczka.jpg';
 
 const aboutMePortableComponents: PortableTextComponents = {
   block: {
@@ -138,8 +138,8 @@ const AboutMe: React.FC = () => {
 
       <section className="section">
         <div className="container text-center">
-          <h2 className="section__title">Certyfikat nr {Config.CertificatNumber}</h2>
-          <img src={certImg} alt="Certyfikat psychoterapii" className="cert-img" />
+          <h2 className="section__title">Certyfikaty i zaświadczenia</h2>
+          <CertificatePhotoStack />
         </div>
       </section>
     </>
