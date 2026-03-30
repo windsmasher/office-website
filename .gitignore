@@ -3,7 +3,6 @@ node_modules
 /dist
 /studio/dist
 /studio/.sanity
-/src/assets/
 
 # local env files
 .env
