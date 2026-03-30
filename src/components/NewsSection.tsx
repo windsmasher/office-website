@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchNewsItems, getSanityBrowserClient } from '../lib/sanity/client';
 import type { NewsItem } from '../lib/sanity/types';
+import { CmsErrorMessage } from './CmsErrorMessage';
 import { NewsBody } from './NewsBody';
 
 type NewsSectionProps = {
@@ -75,22 +76,10 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ embedded = false }) =>
         </div>
       );
     }
-    if (error === 'missing_env') {
+    if (error) {
       return (
         <div className="news-section__dynamic">
-          <p>
-            Brak konfiguracji CMS: ustaw{' '}
-            <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-            <code>VITE_SANITY_DATASET</code> (np. skopiuj{' '}
-            <code>.env.example</code> do <code>.env</code>).
-          </p>
-        </div>
-      );
-    }
-    if (error === 'fetch') {
-      return (
-        <div className="news-section__dynamic">
-          <p>Nie udało się załadować aktualności. Spróbuj odświeżyć stronę.</p>
+          <CmsErrorMessage error={error} fetchResource="aktualności" />
         </div>
       );
     }
@@ -111,28 +100,12 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ embedded = false }) =>
     );
   }
 
-  if (error === 'missing_env') {
+  if (error) {
     return (
       <section className="section">
         <div className="container">
           <h2 className="section__title">Aktualności</h2>
-          <p>
-            Brak konfiguracji CMS: ustaw{' '}
-            <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-            <code>VITE_SANITY_DATASET</code> (np. skopiuj{' '}
-            <code>.env.example</code> do <code>.env</code>).
-          </p>
-        </div>
-      </section>
-    );
-  }
-
-  if (error === 'fetch') {
-    return (
-      <section className="section">
-        <div className="container">
-          <h2 className="section__title">Aktualności</h2>
-          <p>Nie udało się załadować aktualności. Spróbuj odświeżyć stronę.</p>
+          <CmsErrorMessage error={error} fetchResource="aktualności" />
         </div>
       </section>
     );

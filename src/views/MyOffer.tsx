@@ -6,6 +6,7 @@ import {
   getSanityBrowserClient,
 } from '../lib/sanity/client';
 import type { MyOfferPageData } from '../lib/sanity/types';
+import { CmsErrorMessage } from '../components/CmsErrorMessage';
 
 const MyOffer: React.FC = () => {
   const phoneHref = `tel:${Config.PhoneNumber.replace(/\s/g, '')}`;
@@ -54,15 +55,8 @@ const MyOffer: React.FC = () => {
           {data === undefined ? (
             <p className="news-section__status">Ładowanie…</p>
           ) : null}
-          {error === 'missing_env' ? (
-            <p>
-              Brak konfiguracji CMS: ustaw{' '}
-              <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-              <code>VITE_SANITY_DATASET</code>.
-            </p>
-          ) : null}
-          {error === 'fetch' ? (
-            <p>Nie udało się załadować treści. Spróbuj odświeżyć stronę.</p>
+          {error ? (
+            <CmsErrorMessage error={error} fetchResource="treści oferty" />
           ) : null}
           {data === null && !error ? (
             <p>Brak strony oferty w CMS (dokument „Moja oferta”).</p>

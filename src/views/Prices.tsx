@@ -6,6 +6,7 @@ import {
   getSanityBrowserClient,
 } from '../lib/sanity/client';
 import type { PricingPageData } from '../lib/sanity/types';
+import { CmsErrorMessage } from '../components/CmsErrorMessage';
 
 const Prices: React.FC = () => {
   const [data, setData] = useState<PricingPageData | null | undefined>(
@@ -40,16 +41,6 @@ const Prices: React.FC = () => {
   const loading = data === undefined && error === null;
   const phoneHref = `tel:${Config.PhoneNumber.replace(/\s/g, '')}`;
 
-  const cmsError =
-    error === 'missing_env' ? (
-      <p>
-        Brak konfiguracji CMS: ustaw <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-        <code>VITE_SANITY_DATASET</code>.
-      </p>
-    ) : error === 'fetch' ? (
-      <p>Nie udało się załadować cennika. Spróbuj odświeżyć stronę.</p>
-    ) : null;
-
   const pageTitle = data?.pageTitle?.trim() || 'Cennik';
   const pageSubtitle = data?.pageSubtitle?.trim() || 'Sesja psychoterapii';
   const cardLabel = data?.sharedCardLabel?.trim() || 'Sesja psychoterapii';
@@ -71,7 +62,7 @@ const Prices: React.FC = () => {
           {loading ? (
             <p className="news-section__status">Ładowanie…</p>
           ) : null}
-          {cmsError}
+          <CmsErrorMessage error={error} fetchResource="cennika" />
           {!loading && !error && data === null ? (
             <p>Brak cennika w CMS.</p>
           ) : null}

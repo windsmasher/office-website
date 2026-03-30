@@ -4,6 +4,7 @@ import {
   getSanityBrowserClient,
 } from '../lib/sanity/client';
 import type { CompanyPageData } from '../lib/sanity/types';
+import { CmsErrorMessage } from '../components/CmsErrorMessage';
 
 const CompanyInfo: React.FC = () => {
   const [data, setData] = useState<CompanyPageData | null | undefined>(
@@ -37,16 +38,6 @@ const CompanyInfo: React.FC = () => {
 
   const loading = data === undefined && error === null;
 
-  const cmsError =
-    error === 'missing_env' ? (
-      <p>
-        Brak konfiguracji CMS: ustaw <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-        <code>VITE_SANITY_DATASET</code>.
-      </p>
-    ) : error === 'fetch' ? (
-      <p>Nie udało się załadować danych firmy. Spróbuj odświeżyć stronę.</p>
-    ) : null;
-
   const pageTitle = data?.pageTitle?.trim() || 'Dane firmy';
 
   return (
@@ -65,7 +56,9 @@ const CompanyInfo: React.FC = () => {
           {loading ? (
             <p className="news-section__status">Ładowanie…</p>
           ) : null}
-          {error ? cmsError : null}
+          {error ? (
+            <CmsErrorMessage error={error} fetchResource="danych firmy" />
+          ) : null}
           {!loading && !error && data === null ? (
             <p>Brak strony „Dane firmy” w CMS.</p>
           ) : null}

@@ -9,6 +9,7 @@ import {
   getSanityBrowserClient,
 } from '../lib/sanity/client';
 import type { AboutMePageData } from '../lib/sanity/types';
+import { CmsErrorMessage } from '../components/CmsErrorMessage';
 import photoImg from '../assets/michal-paczka-terapia-uzaleznienia-gliwice.jpg';
 import certImg from '../assets/certyfikat-psychoterapia-uzaleznienia-michal-paczka.jpg';
 
@@ -61,16 +62,6 @@ const AboutMe: React.FC = () => {
 
   const loading = data === undefined && error === null;
 
-  const cmsErrorMessage =
-    error === 'missing_env' ? (
-      <p>
-        Brak konfiguracji CMS: ustaw <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-        <code>VITE_SANITY_DATASET</code>.
-      </p>
-    ) : error === 'fetch' ? (
-      <p>Nie udało się załadować treści. Spróbuj odświeżyć stronę.</p>
-    ) : null;
-
   return (
     <>
       <section className="page-header">
@@ -93,7 +84,9 @@ const AboutMe: React.FC = () => {
             {loading ? (
               <p className="news-section__status">Ładowanie…</p>
             ) : null}
-            {error ? cmsErrorMessage : null}
+            {error ? (
+              <CmsErrorMessage error={error} fetchResource="treści" />
+            ) : null}
             {!loading && !error && data === null ? (
               <p>Brak treści „O mnie” w CMS.</p>
             ) : null}

@@ -11,6 +11,7 @@ import {
   type TherapyFormIconVariant,
 } from '../components/TherapyFormIcon';
 import { NewsBody } from '../components/NewsBody';
+import { CmsErrorMessage } from '../components/CmsErrorMessage';
 
 const VALID_ICONS: TherapyFormIconVariant[] = [
   'individual',
@@ -60,16 +61,6 @@ const AboutTherapy: React.FC = () => {
 
   const loading = data === undefined && error === null;
 
-  const cmsError =
-    error === 'missing_env' ? (
-      <p>
-        Brak konfiguracji CMS: ustaw <code>VITE_SANITY_PROJECT_ID</code> i{' '}
-        <code>VITE_SANITY_DATASET</code>.
-      </p>
-    ) : error === 'fetch' ? (
-      <p>Nie udało się załadować treści. Spróbuj odświeżyć stronę.</p>
-    ) : null;
-
   const pageTitle = data?.pageTitle?.trim() || 'O terapii';
   const pageSubtitle =
     data?.pageSubtitle?.trim() ||
@@ -100,7 +91,9 @@ const AboutTherapy: React.FC = () => {
           {loading ? (
             <p className="news-section__status">Ładowanie…</p>
           ) : null}
-          {cmsError}
+          {error ? (
+            <CmsErrorMessage error={error} fetchResource="treści" />
+          ) : null}
           {!loading && !error && data === null ? (
             <p>Brak strony „O terapii” w CMS.</p>
           ) : null}
