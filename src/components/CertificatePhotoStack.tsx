@@ -1,26 +1,21 @@
 import React, { useCallback, useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
-import certMain from '../assets/certificate-gallery-main.png';
-import cert02 from '../assets/certificate-gallery-02.png';
-import cert03 from '../assets/certificate-gallery-03.png';
-import cert04 from '../assets/certificate-gallery-04.png';
-import cert05 from '../assets/certificate-gallery-05.png';
-import cert06 from '../assets/certificate-gallery-06.png';
-import cert07 from '../assets/certificate-gallery-07.png';
-import cert08 from '../assets/certificate-gallery-08.png';
+
+const certGalleryUrl = (filename: string) =>
+  `${import.meta.env.BASE_URL}certificate-gallery/${filename}`;
 
 const CERTIFICATE_IMAGES: { src: string; alt: string }[] = [
   {
-    src: certMain,
+    src: certGalleryUrl('certificate-gallery-main.png'),
     alt: 'Zaświadczenie o ukończeniu szkolenia psychoterapeutycznego — Michał Paczka',
   },
-  { src: cert02, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert03, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert04, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert05, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert06, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert07, alt: 'Dokument szkoleniowy — Michał Paczka' },
-  { src: cert08, alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-02.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-03.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-04.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-05.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-06.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-07.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
+  { src: certGalleryUrl('certificate-gallery-08.png'), alt: 'Dokument szkoleniowy — Michał Paczka' },
 ];
 
 const PANEL_ID = 'certificate-gallery-panel';
